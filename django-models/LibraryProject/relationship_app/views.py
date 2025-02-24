@@ -45,3 +45,15 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return render(request, "relationship_app/logout.html")
+
+
+from django.views.generic.detail import DetailView
+from django.shortcuts import render
+from .models import Library  # Ensure Library model exists
+
+# Class-Based View for displaying library details
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = "relationship_app/library_detail.html"
+    context_object_name = "library"
+
