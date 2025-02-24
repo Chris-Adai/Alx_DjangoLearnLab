@@ -49,7 +49,9 @@ from relationship_app.models import Author, Book, Library, Librarian
 def get_books_by_author(author_name):
     try:
         author = Author.objects.get(name=author_name)  # Use get() instead of filter().first()
-        return author.books.all()
+        books = Book.objects.filter(author=author)  # Use objects.filter(author=author)
+        # return author.books.all()
+        return books
     except Author.DoesNotExist:
         return []
 
