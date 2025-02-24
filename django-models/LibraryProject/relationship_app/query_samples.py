@@ -67,8 +67,11 @@ def get_books_in_library(library_name):
 def get_librarian_for_library(library_name):
     try:
         library = Library.objects.get(name=library_name)  # Use get() instead of filter().first()
-        return library.librarian
-    except Library.DoesNotExist:
+        librarian = Librarian.objects.get(library=library)  # Use Librarian.objects.get(library=...)
+        # return library.librarian
+        return librarian
+    # except Library.DoesNotExist:
+    except (Library.DoesNotExist, Librarian.DoesNotExist):
         return None
 
 # Example usage
