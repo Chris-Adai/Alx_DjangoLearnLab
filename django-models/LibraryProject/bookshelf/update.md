@@ -1,0 +1,10 @@
+from bookshelf.models import Book
+book = Book.objects.get(title="1984")
+book.title = "Nineteen Eighty-Four"
+book.save()
+
+
+# No output is displayed if the operation is successful.
+# Verify the update by retrieving the book:
+Book.objects.get(id=book.id).title
+# Output: 'Nineteen Eighty-Four'
