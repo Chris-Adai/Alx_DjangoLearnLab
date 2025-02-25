@@ -10,7 +10,8 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path("register/", register_view, name="register"),
+    # path("register/", register_view, name="register"),
+    path("register/", views.register, name="register"),  # ✅ Use `views.register`
     path("login/", login_view, name="login"),
     path("logout/", logout_view, name="logout"),
 
