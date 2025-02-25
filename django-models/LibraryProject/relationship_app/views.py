@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+# from django.shortcuts import render
 # from django.views.generic import DetailView
 from django.views.generic.detail import DetailView
-
+# from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import Library
+from django.contrib.auth import login, logout
+
 
 # Create your views here.
 # from django.shortcuts import render
@@ -20,9 +24,9 @@ class LibraryDetailView(DetailView):
     context_object_name = "library"
 
 
-from django.contrib.auth import login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.shortcuts import render, redirect
+# from django.contrib.auth import login, logout
+# from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+# from django.shortcuts import render, redirect
 
 def register_view(request):
     if request.method == "POST":
@@ -60,9 +64,6 @@ def logout_view(request):
 #     template_name = "relationship_app/library_detail.html"
 #     context_object_name = "library"
 
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 
 def register(request):
     if request.method == "POST":
