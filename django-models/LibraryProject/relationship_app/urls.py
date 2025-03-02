@@ -2,12 +2,12 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import list_books, LibraryDetailView
 from .views import register_view, login_view, logout_view
-# from .views.admin_view import admin_view
-# from .views.librarian_view import librarian_view
-# from .views.member_view import member_view
-from .views import admin_view
-from .views import librarian_view
-from .views import member_view
+from .views.admin_view import admin_view
+from .views.librarian_view import librarian_view
+from .views.member_view import member_view
+# from .views import admin_view
+# from .views import librarian_view
+# from .views import member_view
 
 urlpatterns = [
     path("books/", list_books, name="list_books"),
@@ -32,10 +32,4 @@ urlpatterns += [
 
 
 #######################################################
-from django.urls import path
-
-
-urlpatterns = [
-
-]
 
