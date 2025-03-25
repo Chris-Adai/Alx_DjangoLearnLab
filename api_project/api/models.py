@@ -7,3 +7,11 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Author(models.Model):
+    """Represents an author who writes books"""
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
