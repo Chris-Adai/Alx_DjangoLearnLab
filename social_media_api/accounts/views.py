@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import UserSerializer, CustomTokenObtainPairSerializer, PostSerializer
 from django.contrib.auth import get_user_model
 # from posts.models import Post
-from .models import Post, User
+from .models import Post, User, CustomUser
 
 ##
 from rest_framework.decorators import action
@@ -63,7 +63,9 @@ class UserListView(generics.GenericAPIView):
     """
     A view to list all users.
     """
-    queryset = User.objects.all()
+    # queryset = User.objects.all()  # CustomUser
+    queryset = CustomUser.objects.all()  # CustomUser
+
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
