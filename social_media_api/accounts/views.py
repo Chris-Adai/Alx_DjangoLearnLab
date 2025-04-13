@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import UserSerializer, CustomTokenObtainPairSerializer, PostSerializer
 from django.contrib.auth import get_user_model
 # from posts.models import Post
-from .models import Post
+from .models import Post, User
 
 ##
 from rest_framework.decorators import action
@@ -56,3 +56,18 @@ class FeedView(generics.ListAPIView):
     def get_queryset(self):
         following_users = self.request.user.followers.all()
         return Post.objects.filter(author__in=following_users).order_by('-created_at')
+
+
+#
+class UserListView(generics.GenericAPIView):
+    """
+    A view to list all users.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        users = self.get_queryset()
+        serializer = self.get_serializer(users, many=True)
+        return Response(serializer.data)

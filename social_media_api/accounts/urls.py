@@ -4,7 +4,7 @@ from .views import RegisterView, CustomTokenObtainPairView, ProfileView
 
 #
 from rest_framework.routers import DefaultRouter
-from .views import UserViewSet, FeedView
+from .views import UserViewSet, FeedView, UserListView
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -19,6 +19,7 @@ urlpatterns = [
     #
     path('', include(router.urls)),
     path('feed/', FeedView.as_view(), name='feed'),
+    path('users/', UserListView.as_view(), name='user-list'),
 
 ]
 
