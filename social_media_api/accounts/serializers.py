@@ -13,7 +13,9 @@ class UserSerializer(serializers.ModelSerializer):
     #     fields = ('id', 'username', 'email', 'bio', 'profile_picture')
 
     # password = serializers.CharField(write_only=True)
-    serializers.CharField(write_only=True)
+   # serializers.CharField(write_only=True)
+    serializers.CharField()
+
 
     class Meta:
         model = User
