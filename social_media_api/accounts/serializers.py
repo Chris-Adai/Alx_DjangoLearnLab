@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Post
@@ -7,9 +8,25 @@ from .models import Post
 User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
+    # class Meta:
+    #     model = User
+    #     fields = ('id', 'username', 'email', 'bio', 'profile_picture')
+
+    password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'bio', 'profile_picture')
+        fields = ['id', 'username', 'email', 'password']
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data.get('email'),
+            password=validated_data['password']
+        )
+        # Create a token for the new user
+        Token.objects.create(user=user)
+        return user
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -25,3 +42,6 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+
+

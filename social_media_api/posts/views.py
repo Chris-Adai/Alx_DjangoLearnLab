@@ -28,12 +28,13 @@ class PostViewSet(viewsets.ModelViewSet):
     
     @action(detail=True, methods=['post'])
     def like(self, request, pk=None):
-    post = self.get_object()
-    like, created = Like.objects.get_or_create(post=post, user=request.user)
-    if not created:
-        like.delete()
-        return Response({'status': 'unliked'}, status=status.HTTP_200_OK)
-    return Response({'status': 'liked'}, status=status.HTTP_201_CREATED)
+        post = self.get_object()
+        like, created = Like.objects.get_or_create(post=post, user=request.user)
+        
+        if not created:
+            like.delete()
+            return Response({'status': 'unliked'}, status=status.HTTP_200_OK)
+        return Response({'status': 'liked'}, status=status.HTTP_201_CREATED)
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
