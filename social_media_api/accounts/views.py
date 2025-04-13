@@ -62,7 +62,8 @@ class FeedView(generics.ListAPIView):
         # Filter posts by authors in the following list and order by creation date
         return Post.objects.filter(author__in=following_users).order_by('-created_at')
         # return Post.objects.filter(author__in=following_users).order_by()
-        
+        return Post.objects.filter(author__in=self.request.user.following.all()).order_by('-created_at')
+     
 #
 class UserListView(generics.GenericAPIView):
     """
